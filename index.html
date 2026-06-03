@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Flower Frontend</title>
+</head>
+
+<body>
+
+    <div id="app" class="container mt-4">
+
+        <h1>Mine blomster</h1>
+
+        <button @click="getAllFlowers" class="btn btn-primary mb-3">
+            Hent blomster
+        </button>
+        <button @click="sortFlowers" class="btn btn-secondary mb-3">
+            Sorter blomster alfabetisk
+        </button>
+
+        <div v-if="error" class="alert alert-danger">
+
+    Der skete en fejl. Tjek Console.
+
+</div>
+<input
+    v-model="searchText"
+    class="form-control mb-3"
+    placeholder="Søg efter farve">
+
+  <table class="table table-striped">
+
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Farve</th>
+            <th>Opdater</th>
+            <th>Slet</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        <tr v-for="flower in filteredFlowers" :key="flower.id">
+
+            <td>{{ flower.id }}</td>
+
+            <td>
+                <input
+                    v-model="flower.color"
+                    class="form-control">
+            </td>
+
+            <td>
+                <button
+                    @click="updateFlower(flower)"
+                    class="btn btn-warning btn-sm">
+                    Opdater
+                </button>
+            </td>
+
+            <td>
+                <button
+                    @click="deleteFlower(flower.id)"
+                    class="btn btn-danger btn-sm">
+                    Slet
+                </button>
+            </td>
+
+        </tr>
+
+    </tbody>
+
+</table>
+
+        <input v-model="newColor" class="form-control mb-2" placeholder="Skriv farve">
+
+        <button @click="createFlower" class="btn btn-success">
+            Opret blomst
+        </button>
+
+        <hr>
+
+    </div>
+
+    <!-- Vue bibliotek -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <!-- Axios bibliotek -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <!-- Din JavaScript -->
+    <script src="index.js"></script>
+
+</body>
+
+</html>
